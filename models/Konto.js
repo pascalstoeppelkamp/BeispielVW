@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const KontoSchema = new mongoose.Schema({
-    Name: {
+    KontoName: {
         type: String,
         trim: true,
         required: [true, 'Bitte geben Sie Ihren Namen ein.']
@@ -14,7 +14,8 @@ const KontoSchema = new mongoose.Schema({
     vereinsmitglied: {
         type: mongoose.Schema.ObjectId,
         ref: 'Vereinsmitglied',
-        required: true
+        required: true,
+        unique: true,
     }
 });
 

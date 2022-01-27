@@ -30,7 +30,7 @@ exports.createVereinsmitglied = asyncHandler(async (req, res, next) => {
     res.status(201).json({
         success: true,
         data: mitglied
-    })
+    });
 })
 
 //@desc Update  Vereinsmitglied hinzu
