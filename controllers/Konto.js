@@ -41,7 +41,7 @@ exports.getKonto = asyncHandler(async (req, res, next) => {
 //@desc Füge neues Konto hinzu
 //@route POST /api/v1/vereinsmitglied/:mitgliedID/konto
 exports.createKonto = asyncHandler(async (req, res, next) => {
-    req.body.bootcamp = req.params.bootcampId;
+    req.body.vereinsmitglied = req.params.mitgliedId;
     const konto = await Konto.create(req.body);
 
     res.status(201).json({

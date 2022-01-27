@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
-
+const cors = require("cors");
 const errorHandler = require('./middleware/error');
 
 const connectDB = require("./config/db");
@@ -14,7 +14,7 @@ connectDB();
 const vereinsmitglied = require('./routes/Vereinsmitglied');
 const konto = require("./routes/Konto")
 const app = express();
-
+app.use(cors())
 // Body parser
 app.use(express.json());
 // Mount routers
