@@ -49,3 +49,30 @@ exports.createKonto = asyncHandler(async (req, res, next) => {
         data: konto
     })
 })
+
+//@desc update Konto
+//@route PUT /api/v1/vereinsmitglied/:mitgliedID/konto
+exports.updateKonto = asyncHandler(async (req, res, next) => {
+    await Konto.findByIdAndUpdate(req.params.mitgliedId, req.body)
+
+    const konto = await Konto.findById(req.params.mitgliedId)
+
+    res.status(201).json({
+        success: true,
+        data: konto
+    })
+})
+
+//@desc update Konto
+//@route DELETE /api/v1/vereinsmitglied/:mitgliedID/konto
+exports.deleteKonto = asyncHandler(async (req, res, next) => {
+    await Konto.findByIdAndDelete(req.params.mitgliedId)
+
+    const konto = await Konto.findById(req.params.mitgliedId)
+    if (!konto)
+    console.log("Konto wurde gelöscht")
+    res.status(201).json({
+        success: true,
+        data: konto
+    })
+})
