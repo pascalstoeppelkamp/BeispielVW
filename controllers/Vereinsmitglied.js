@@ -3,6 +3,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 
 const Vereinsmitglied = require("../models/Vereinsmitglied");
+const Konto = require("../models/Konto");
 //@desc Lese alle Vereinsmitglieder 
 //@route GET /api/v1/Vereinsmitglieder
 exports.getVereinsmitglieder = asyncHandler(async (req, res, next) => {
@@ -27,9 +28,13 @@ exports.getVereinsmitglied = asyncHandler(async (req, res, next) => {
 //@route POST /api/v1/Vereinsmitglied
 exports.createVereinsmitglied = asyncHandler(async (req, res, next) => {
     const mitglied = await Vereinsmitglied.create(req.body);
+    req.body.vereinsmitglied = mitglied.id;
+    const konto = await Konto.create(req.body);
+
+
     res.status(201).json({
         success: true,
-        data: mitglied
+        data: mitglied,
     });
 })
 

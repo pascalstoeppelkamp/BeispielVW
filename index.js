@@ -13,6 +13,8 @@ connectDB();
 // Route files
 const vereinsmitglied = require('./routes/Vereinsmitglied');
 const konto = require("./routes/Konto")
+const auth = require("./routes/auth")    
+
 const app = express();
 app.use(cors())
 // Body parser
@@ -20,6 +22,7 @@ app.use(express.json());
 // Mount routers
 app.use('/api/v1/vereinsmitglied', vereinsmitglied);
 app.use('/api/v1/konto', konto);
+app.use('/api/v1/auth', auth)
 
 app.use(errorHandler);
 
