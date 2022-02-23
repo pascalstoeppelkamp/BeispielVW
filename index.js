@@ -8,12 +8,13 @@ const connectDB = require("./config/db");
 
 dotenv.config({ path: './config/config.env' });
 
+const payPremium = require("./utils/PayPremium");
 connectDB();
 
 // Route files
 const vereinsmitglied = require('./routes/Vereinsmitglied');
 const konto = require("./routes/Konto")
-const auth = require("./routes/auth")    
+const auth = require("./routes/auth")
 
 const app = express();
 app.use(cors())

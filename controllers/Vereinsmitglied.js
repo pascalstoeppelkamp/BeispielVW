@@ -60,3 +60,18 @@ exports.deleteVereinsmitglied = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc      Pay Premium from current User
+// @route     POST /api/v1/Vereinsmitglied/payPremium
+// @access    Private
+exports.payPremium = asyncHandler(async (req, res, next) => {
+    await Vereinsmitglied.findByIdAndUpdate(req.user.id, { hasPremium: true });
+    const user = await Vereinsmitglied.findById(req.user.id);
+    res.status(200).json({
+        success: true,
+        data: {
+            hasPremium: user.hasPremium
+        }
+    });
+});
+
+

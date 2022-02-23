@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const VereinsmitgieldSchema = new mongoose.Schema({
     Vorname: {
         type: String,
@@ -52,6 +53,15 @@ const VereinsmitgieldSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    lastPayedDay: {
+        type: Date,
+        required: false
+    },
+    hasPremium: {
+        type: Boolean,
+        required: false,
+        default: false
+    }
 },
     {
         toJSON: { virtuals: true },
