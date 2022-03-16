@@ -1,7 +1,7 @@
 const path = require("path");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
-
+const bcrypt = require('bcryptjs');
 const Vereinsmitglied = require("../models/Vereinsmitglied");
 const Konto = require("../models/Konto");
 //@desc Lese alle Vereinsmitglieder 
@@ -31,7 +31,6 @@ exports.createVereinsmitglied = asyncHandler(async (req, res, next) => {
     req.body.vereinsmitglied = mitglied.id;
     const konto = await Konto.create(req.body);
 
-
     res.status(201).json({
         success: true,
         data: mitglied,
@@ -41,8 +40,12 @@ exports.createVereinsmitglied = asyncHandler(async (req, res, next) => {
 //@desc Update  Vereinsmitglied hinzu
 //@route PUT /api/v1/Vereinsmitglied/:id
 exports.updateVereinsmitglied = asyncHandler(async (req, res, next) => {
+    const salt = await bcrypt.genSalt(10);
+    req.body.password = await bcrypt.hash(req.body.password, salt);
     await Vereinsmitglied.findByIdAndUpdate(req.params.id, req.body);
-    const mitglied = await Vereinsmitglied.findById(req.params.id)
+    const mitglied = await Vereinsmitglied.findById(req.params.id);
+
+    console.log(mitglied);
     res.status(201).json({
         success: true,
         data: mitglied
